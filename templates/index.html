@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}League Stats{% endblock %}
+
+{% block content %}
+<main>
+  <h1>League Stats</h1>
+  <section aria-labelledby="accounts-heading">
+    <h2 id="accounts-heading">Accounts</h2>
+    {% include "partials/stats_table.html" %}
+    <form action="/accounts" method="post">
+      <label>PUUID <input name="puuid" required></label>
+      <label>Game name <input name="game_name" required></label>
+      <label>Tag line <input name="tag_line" required></label>
+      <label>Region <input name="region" value="americas" required></label>
+      <button type="submit">Add account</button>
+    </form>
+    <ul>
+      {% for account in accounts %}
+      <li>{{ account.game_name }}#{{ account.tag_line }} ({{ account.region }})</li>
+      {% else %}
+      <li>No accounts added yet.</li>
+      {% endfor %}
+    </ul>
+  </section>
+</main>
+{% endblock %}
